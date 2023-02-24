@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,31 +9,37 @@
     <link href="favicon.ico" rel="shortcut icon" />
     <link rel="stylesheet" href="regular.css">
     
-</head>
-<body style="background-image: url(&quot;https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/03.jpg&quot;); background-size: cover;">
+    
+  </head>
   
-    <header class="header">
-        <div class="player">
-          <div class="player-controls">
-            <button class="play-prev player-icon"></button>
-            <button class="play player-icon"><audio  src="assets_sounds_Aqua Caelestis (1).mp3"></audio></button>
-            <button class="play-next player-icon"></button>
-          </div>
-          <ul class="play-list">Aqua Caelestis</ul>
-          <ul class="play-list"> River Flows In You</ul>
-          <ul class="play-list">Summer Wind</ul>
-          <ul class="play-list">Ennio Morricone</ul>
+    
+    <body>
+  
+     
+
+     
+      <header class="header">
+      <div class="player">
+        <div class="player-controls">
+          
+          <button class="play-prev player-icon"></button>
+          <input type="button" value="PLAY" onclick="play()" class="play player-icon"></input>
+          <audio id="audio" src="assets_sounds_Aqua Caelestis.mp3"></audio>
+          <script>
+             function play() {
+        var audio = document.getElementById("audio");
+        audio.play();
+      }
+          </script>
+          <button class="play-next player-icon"></button>
         </div>
-        <script>
-          const li = document.createElement('li');
-
-              playListPlayer.forEach(item=>{
-                    li.classList.add('play-item')
-                   li.textContent = item.title
-                      playList.append(li)
-
-                      })
-        </script>
+        <ul class="play-list">✔Aqua Caelestis
+         </ul>
+         <ul class="play-list">✔River Flows In You</ul> 
+           <ul class="play-list">✔Summer Wind</ul>
+              <ul class="play-list">✔Ennio Morricone</ul>
+         
+      </div>
         <div class="weather">
           <input type="text" class="city" placeholder="Minsk">
           <div class="weather-container">
@@ -45,50 +51,62 @@
                    const url = `https://api.openweathermap.org/data/2.5/weather?q=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA&lang=en&appid=88232d9b109398ae364671569cc80151&units=metric`; 
                       const res = await fetch(url); 
                          const data = await res.json();  
-                       console.log(data.weather[0].id, data.weather[0].description, data.main.temp); 
+                      
                      } 
                     getWeather() 
+                                 
                      const weatherIcon = document.querySelector('.weather-icon'); 
                      const temperature = document.querySelector('.temperature'); 
                      const weatherDescription = document.querySelector('.weather-description'); 
+                     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=ru&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
                      async function getWeather() { 
                      const url = `https://api.openweathermap.org/data/2.5/weather?q=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA&lang=en&appid=88232d9b109398ae364671569cc80151&units=metric`; 
                      const res = await fetch(url); 
                      const data = await res.json(); 
                      weatherIcon.className = 'weather-icon owf'; 
                      weatherIcon.classList.add(`owf-${data.weather[0].id}`); 
-                     temperature.textContent = `${data.main.temp}°C`; 
+                     temperature.textContent = ` ${data.main.temp}°C` 
+                     wind.textContent = `Wind speed: ${data.wind.speed}m/s`;
                      weatherDescription.textContent = data.weather[0].description; 
-                     wind.textContent = `${data.main.wind}m/s`; 
-                     humidity.textContent = `${data.main.humidity}%`; 
+                     humidity.textContent = `Humidity: ${data.main.humidity}%`;
+                    }  
+                     
+                    
                       
-                          }  
-                          function setCity(event) { 
-                             if (event.code  === 'Enter'){ 
-                              getWeather() 
-                             } 
-                          }     
-                           
-                          city.addEventListener('change', setCity) 
+                         
  
                           
-                          const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=ru&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
 
              </script>
             </div>
             <div class="wind"></div>
             <div class="humidity"></div>
+            <script>
+            async function getWeather() {   
+              const url = `https://api.openweathermap.org/data/2.5/weather?q=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA&lang=en&appid=88232d9b109398ae364671569cc80151&units=metric`; 
+                 const res = await fetch(url); 
+                    const data = await res.json();  
+                  
+                } 
+               getWeather() 
+               
+               const wind = document.querySelector('.wind'); 
+                const humidity = document.querySelector('.humidity');
+                async function getWeather() { 
+                const url = `https://api.openweathermap.org/data/2.5/weather?q=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA&lang=en&appid=88232d9b109398ae364671569cc80151&units=metric`; 
+                const res = await fetch(url); 
+                const data = await res.json(); 
+                wind.className = 'wind'; 
+               
+                
+               
+                
+                 
+                     }  
+       </script>
            </div>
             
       </header>
-      <main class="main">
-        <div class="slider-icons">
-          <button id="prev" class="slide-prev slider-icon"></button>
-          <button id="next" class="slide-next slider-icon"></button>
-        </div>
-        <script>
-          body.style.backgroundImage = "url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/18.jpg')";
-        </script>
 
 
         <div id="clock" class="time"></div>
